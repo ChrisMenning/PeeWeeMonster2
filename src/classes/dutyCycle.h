@@ -11,6 +11,7 @@ class DutyCycle{
     void DutyCycleSweep(int, float);
     float SetSweepRate(int);
     int GetWobbleSteps(int);
+    int GetWobbleSmooth(int inputPot);
     float KnobTone(int);
 
     // Constructor

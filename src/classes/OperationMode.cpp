@@ -22,7 +22,7 @@ int OperationMode::GetOperationMode(){
 
     previous = reading;
 
-    if (mode > 5)
+    if (mode > 8)
     {
       mode = 1;
     }

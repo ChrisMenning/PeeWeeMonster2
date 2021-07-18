@@ -64,12 +64,27 @@ void loop() {
     float sweepRate = Phase.SetSweepRate(potPin2);
     Phase.DutyCycleSweep(sweepMode, sweepRate);
     Op.PlayTone(knobTone, Phase, Player);
-  } else if (mode == 5)
+  } else if (mode == 5) // LOW FREQ WOBBLE IN EVEN STEPS
   {
     AllColors.Purple();
-  } else if (mode == 6)
+    Phase.SetDutyCycle(potPin2);
+    int wobbleFreq = Phase.GetWobbleSteps(potPin3);
+    Serial.println(wobbleFreq);
+    Player.PlayLowFreqUsingDelay(1000 / wobbleFreq, buzzerPin, Phase);
+  } else if (mode == 6) // LOW FREQ WOBBLE SMOOTH STEPS
   {
     AllColors.Yellow();
+    Phase.SetDutyCycle(potPin2);
+    int wobbleFreq = Phase.GetWobbleSmooth(potPin3);
+    Serial.println(wobbleFreq);
+    Player.PlayLowFreqUsingDelay(1000 / wobbleFreq, buzzerPin, Phase);
+  } else if (mode == 7) // LOW FREQ WOBBLE SMOOTH STEPS
+  {
+    AllColors.White(); // SYNC
+    Player.Sync();
+  } else if (mode == 8)
+  {
+    AllColors.Off();
   }
 }
 

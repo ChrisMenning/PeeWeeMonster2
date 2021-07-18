@@ -8,6 +8,7 @@ class Colors{
     void Cyan();
     void Purple();
     void White();
+    void Off();
     Colors(){
         
     }

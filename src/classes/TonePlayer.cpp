@@ -7,15 +7,17 @@
 
 void TonePlayer::PlayLowFreqUsingDelay(int input, int buzzerPin, DutyCycle duty)
 {
-    IsPlaying = true;
-    digitalWrite(buzzerPin, HIGH);
-    digitalWrite(beatLed, HIGH); 
-    delayMicroseconds(duty.HighPart);
-    digitalWrite(buzzerPin, LOW);
-    digitalWrite(beatLed, LOW); 
-    delayMicroseconds(duty.LowPart());
-    IsPlaying = false;
-
+    if (IsPlaying == false)
+    {
+        IsPlaying = true;
+        digitalWrite(buzzerPin, HIGH);
+        digitalWrite(beatLed, HIGH); 
+        delay(input * (duty.HighPart * 2));
+        digitalWrite(buzzerPin, LOW);
+        digitalWrite(beatLed, LOW); 
+        delay(input * (duty.LowPart() * 2));
+        IsPlaying = false;
+    }
 }
 
 void TonePlayer::PlayToneUsingDelay (Note input, int buzzerPin, DutyCycle duty)
@@ -51,4 +53,25 @@ void TonePlayer::PlayToneWithoutDelay (Note input, int buzzerPin, DutyCycle duty
     {
         digitalWrite(buzzerPin, LOW);
     }
+}
+
+void TonePlayer::Sync()
+{
+  int syncInValue = analogRead(syncIn);
+    
+  if (syncInValue > 100)
+  {
+    int steps = 50;
+    if (IsPlaying == false)
+    {
+        IsPlaying = true;
+        digitalWrite(buzzerPin, HIGH);
+        digitalWrite(beatLed, HIGH); 
+        delay(1000 / steps);
+        digitalWrite(buzzerPin, LOW);
+        digitalWrite(beatLed, LOW); 
+        delay(1000 / steps);
+        IsPlaying = false;
+    }
+  } 
 }

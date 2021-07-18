@@ -49,3 +49,10 @@ void Colors::White()
         digitalWrite(GREEN_PIN, HIGH);
         digitalWrite(BLUE_PIN, HIGH);
 }
+
+void Colors::Off()
+{
+      digitalWrite(RED_PIN, LOW);
+        digitalWrite(GREEN_PIN, LOW);
+        digitalWrite(BLUE_PIN, LOW);
+}

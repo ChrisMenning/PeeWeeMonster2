@@ -74,9 +74,17 @@ void DutyCycle::DutyCycleSweep(int sweepMode, float rate)
     LowPart(); // Set low part of duty cycle.
 }
 
-// PWM pulse steps - For wobble mode
-int DutyCycle::GetWobbleSteps(int inputValue)
+float DutyCycle::KnobTone (int FreqPot)
 {
+    int freqValue = analogRead(FreqPot);
+    float rate = mapIntRangetoFloatRange(freqValue, 0, 698, 0.1, 10000);
+    return rate;
+}
+
+// PWM pulse steps - For wobble mode
+int DutyCycle::GetWobbleSteps(int inputPot)
+{
+  int inputValue = analogRead(inputPot);
   if (inputValue > 0 && inputValue < 50)
   {
     return 1;  
@@ -109,9 +117,9 @@ int DutyCycle::GetWobbleSteps(int inputValue)
   else return 0;
 }
 
-float DutyCycle::KnobTone (int FreqPot)
+int DutyCycle::GetWobbleSmooth(int inputPot)
 {
-    int freqValue = analogRead(FreqPot);
-    float rate = mapIntRangetoFloatRange(freqValue, 0, 698, 0.1, 10000);
-    return rate;
+  int value = analogRead(inputPot);
+  int newValue = mapIntRangetoFloatRange(value, 0, 700, 1, 256);
+  return newValue;
 }

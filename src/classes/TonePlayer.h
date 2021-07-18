@@ -9,4 +9,5 @@ class TonePlayer{
     void PlayToneUsingDelay(Note, int, DutyCycle);
     void PlayToneWithoutDelay (Note, int, DutyCycle, Timer, Timer);
     void PlayLowFreqUsingDelay(int, int, DutyCycle);
+    void Sync();
 };
