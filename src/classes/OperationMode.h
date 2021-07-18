@@ -15,7 +15,7 @@ class OperationMode{
     long time = 0;         // the last time the output pin was toggled
     long debounce = 200;   // the debounce time, increase if the output flickers
     int GetOperationMode();
-    void PlayNote(AllNotes, DutyCycle, TonePlayer);
-    void PlayWithoutDelay(AllNotes, DutyCycle, TonePlayer, Timer, Timer);
+    void PlayNote(AllNotes notes, DutyCycle duty, TonePlayer player);
+    void PlayWithoutDelay(AllNotes notes, DutyCycle duty, TonePlayer player, Timer high, Timer low);
     void PlayTone(float tone, DutyCycle duty, TonePlayer player);
 };

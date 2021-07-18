@@ -114,12 +114,12 @@ int DutyCycle::GetWobbleSteps(int inputPot)
   {
     return 64; 
   }
-  else return 0;
+  else return 1;
 }
 
 int DutyCycle::GetWobbleSmooth(int inputPot)
 {
   int value = analogRead(inputPot);
-  int newValue = mapIntRangetoFloatRange(value, 0, 700, 1, 256);
+  int newValue = mapIntRangetoFloatRange(value, 0, 700, 1, 128);
   return newValue;
 }

@@ -41,5 +41,5 @@ class AllNotes{
                       Note("C4", 843, 350.3),
                       };
                       
-    Note GetNoteFromCV(int);
+    Note GetNoteFromCV(int cvValue);
 };

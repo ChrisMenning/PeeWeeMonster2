@@ -6,8 +6,8 @@
 class TonePlayer{
     public:
     bool IsPlaying;
-    void PlayToneUsingDelay(Note, int, DutyCycle);
-    void PlayToneWithoutDelay (Note, int, DutyCycle, Timer, Timer);
-    void PlayLowFreqUsingDelay(int, int, DutyCycle);
+    void PlayToneUsingDelay(Note note, int outputPin, DutyCycle phase);
+    void PlayToneWithoutDelay (Note tone, int outputPin, DutyCycle phase, Timer high, Timer full);
+    void PlayLowFreqUsingDelay(int tone, int outputPin, DutyCycle phase);
     void Sync();
 };

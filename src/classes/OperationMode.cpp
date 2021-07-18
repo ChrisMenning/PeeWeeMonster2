@@ -7,7 +7,6 @@
 int OperationMode::GetOperationMode(){
   int reading = digitalRead(button1Pin);
   reading = digitalRead(button1Pin);
-  
 
     if (reading == HIGH && previous == LOW && millis() - time > debounce) {
       if (state == HIGH)
