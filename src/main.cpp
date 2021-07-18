@@ -8,14 +8,17 @@
 #include "classes/TonePlayer.h"
 #include "classes/math_utils.h"
 #include "classes/Timer.h"
+#include "classes/Colors.h"
 
 // Global variables
 DutyCycle Phase;
 AllNotes Notes;
 TonePlayer Player;
 OperationMode Op;
-Timer highTimer;
-Timer fullTimer;
+//Timer highTimer;
+//Timer fullTimer;
+Timer ModeTimer;
+Colors AllColors;
 
 // Function primatives
 void PlayNote();
@@ -32,9 +35,32 @@ void setup() {
 }
 
 void loop() {
-  // put your main code here, to run repeatedly:
-  Phase.SetDutyCycle(potPin2);
-
-  Op.PlayWithoutDelay(Notes, Phase, Player, highTimer, fullTimer);
+  int mode = Op.GetOperationMode();
+  
+  if (mode == 1) // VOICE WITH POTENTIOMETER DRIVEN  
+  {
+    AllColors.Red();
+    Phase.SetDutyCycle(potPin2);
+    Op.PlayNote(Notes, Phase, Player);
+  } else if (mode == 2) // VOICE WITH SWEEPS
+  {
+    AllColors.Green();
+    int sweepMode = Phase.SetSweepMode(potPin2);
+    float sweepRate = Phase.SetSweepRate(potPin3);
+    Phase.DutyCycleSweep(sweepMode, sweepRate);
+    Op.PlayNote(Notes, Phase, Player);
+  } else if (mode == 3)
+  {
+    AllColors.Blue();
+  } else if (mode == 4)
+  {
+    AllColors.Cyan();
+  } else if (mode == 5)
+  {
+    AllColors.Purple();
+  } else if (mode == 6)
+  {
+    AllColors.Yellow();
+  }
 }
 

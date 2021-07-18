@@ -4,6 +4,33 @@
 #include "TonePlayer.h"
 #include "Timer.h"
 
+int OperationMode::GetOperationMode(){
+  int reading = digitalRead(button1Pin);
+  reading = digitalRead(button1Pin);
+  
+
+    if (reading == HIGH && previous == LOW && millis() - time > debounce) {
+      if (state == HIGH)
+        state = LOW;
+      else
+        state = HIGH;
+
+      // Regardless of high or low, increment mode number.
+      mode++;
+    time = millis();    
+  }
+
+    previous = reading;
+
+    if (mode > 5)
+    {
+      mode = 1;
+    }
+
+
+  return mode;
+}
+
 void OperationMode::PlayNote(AllNotes notes, DutyCycle duty, TonePlayer player){
   int cvValue = analogRead(cvIn);
   int gateValue = analogRead(gateIn);

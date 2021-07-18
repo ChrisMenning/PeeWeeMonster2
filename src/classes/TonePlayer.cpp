@@ -25,7 +25,7 @@ void TonePlayer::PlayToneWithoutDelay (Note input, int buzzerPin, DutyCycle duty
     unsigned long low = input.GetPartial().LowLength(duty);
     bool highDone = highTimer.IsDone(high);
     bool fullDone = highTimer.IsDone(high+low);
-    String msg = "HighTimer: ";
+    
     if (highDone == false && fullDone == false)
     {
         digitalWrite(buzzerPin, HIGH);

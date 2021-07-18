@@ -5,8 +5,13 @@ class DutyCycle{
     float LowPart();
     const float HighCeiling = 0.99;;
     const float HighFloor = 0.001;
-    void SetDutyCycle(int input);
+    bool rising = true;
+    void SetDutyCycle(int);
+    int SetSweepMode(int);
+    void DutyCycleSweep(int, float);
+    float SetSweepRate(int);
 
+    // Constructor
     DutyCycle(){
         
     }
