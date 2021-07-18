@@ -2,16 +2,14 @@
 #include "TonePlayer.h"
 #include "note.h"
 #include "math_utils.h"
+#include "Timer.h"
 
 void TonePlayer::PlayToneUsingDelay (Note input, int buzzerPin, DutyCycle duty)
 {
     if (input.AnalogValue > 0 && IsPlaying == false)
     {
-        Note tunedNote("tunedNote", input.AnalogValue, input.Freq * tuning());
-        //Serial.println(tuning());
-        //Serial.println(tunedNote.Freq);
-        unsigned long high = tunedNote.GetPartial().HighLength(duty);
-        unsigned long low = tunedNote.GetPartial().LowLength(duty);
+        unsigned long high = input.GetPartial().HighLength(duty);
+        unsigned long low = input.GetPartial().LowLength(duty);
         IsPlaying = true;
         digitalWrite(buzzerPin, HIGH);
         delayMicroseconds(high);
@@ -21,14 +19,20 @@ void TonePlayer::PlayToneUsingDelay (Note input, int buzzerPin, DutyCycle duty)
     }
 }
 
-void TonePlayer::PlayToneWithoutDelay (float input, int buzzerPin, DutyCycle duty)
+void TonePlayer::PlayToneWithoutDelay (Note input, int buzzerPin, DutyCycle duty, Timer highTimer, Timer fullTimer)
 {
-    if (input > 0 && IsPlaying == false)
+    unsigned long high = input.GetPartial().HighLength(duty);
+    unsigned long low = input.GetPartial().LowLength(duty);
+    bool highDone = highTimer.IsDone(high);
+    bool fullDone = highTimer.IsDone(high+low);
+    String msg = "HighTimer: ";
+    if (highDone == false && fullDone == false)
     {
-        IsPlaying = true;
         digitalWrite(buzzerPin, HIGH);
+    } else if (highDone == true && fullDone == false){
         digitalWrite(buzzerPin, LOW);
-        delayMicroseconds((input/ duty.LowPart()));
-        IsPlaying = false;
+    } else if (fullDone == true)
+    {
+        digitalWrite(buzzerPin, LOW);
     }
 }

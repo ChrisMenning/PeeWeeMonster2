@@ -7,11 +7,15 @@
 #include "classes/OperationMode.h"
 #include "classes/TonePlayer.h"
 #include "classes/math_utils.h"
+#include "classes/Timer.h"
 
 // Global variables
 DutyCycle Phase;
 AllNotes Notes;
 TonePlayer Player;
+OperationMode Op;
+Timer highTimer;
+Timer fullTimer;
 
 // Function primatives
 void PlayNote();
@@ -30,19 +34,7 @@ void setup() {
 void loop() {
   // put your main code here, to run repeatedly:
   Phase.SetDutyCycle(potPin2);
-  PlayNote();
+
+  Op.PlayWithoutDelay(Notes, Phase, Player, highTimer, fullTimer);
 }
 
-void PlayNote(){
-  int cvValue = analogRead(cvIn);
-  int gateValue = analogRead(gateIn);
-  int tuningValue = analogRead(potPin3);
-  if (gateValue > 1000)
-  {
-      Note note = Notes.GetNoteFromCV(cvValue);
-      Player.PlayToneUsingDelay(note, buzzerPin, Phase);
-  } else
-  {
-      noTone(buzzerPin);
-  }
-}

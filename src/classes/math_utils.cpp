@@ -12,6 +12,5 @@ float mapIntRangetoFloatRange(int input, float inMin, float inMax, float outMin,
 float tuning ()
 {
   int tuningValue = analogRead(potPin1);
-  Serial.println(tuningValue);
   return mapIntRangetoFloatRange(tuningValue, 0, 695, 0.9, 1.2);
 }
