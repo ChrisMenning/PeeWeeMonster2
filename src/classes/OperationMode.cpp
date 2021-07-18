@@ -31,6 +31,11 @@ int OperationMode::GetOperationMode(){
   return mode;
 }
 
+void OperationMode::PlayTone(float tone, DutyCycle duty, TonePlayer player){
+  Note note = {"tone", 1, tone};
+  player.PlayToneUsingDelay(note, buzzerPin, duty);
+}
+
 void OperationMode::PlayNote(AllNotes notes, DutyCycle duty, TonePlayer player){
   int cvValue = analogRead(cvIn);
   int gateValue = analogRead(gateIn);

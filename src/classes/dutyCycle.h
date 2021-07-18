@@ -10,6 +10,8 @@ class DutyCycle{
     int SetSweepMode(int);
     void DutyCycleSweep(int, float);
     float SetSweepRate(int);
+    int GetWobbleSteps(int);
+    float KnobTone(int);
 
     // Constructor
     DutyCycle(){

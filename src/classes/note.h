@@ -2,6 +2,7 @@
 #include <Arduino.h>
 #include "dutyCycle.h"
 #include "Partial.h"
+
 class Note{
     public:
     String Name;

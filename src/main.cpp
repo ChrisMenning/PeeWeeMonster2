@@ -49,12 +49,21 @@ void loop() {
     float sweepRate = Phase.SetSweepRate(potPin3);
     Phase.DutyCycleSweep(sweepMode, sweepRate);
     Op.PlayNote(Notes, Phase, Player);
-  } else if (mode == 3)
+  } else if (mode == 3) // POT-DRIVEN TONE
   {
     AllColors.Blue();
-  } else if (mode == 4)
+    Phase.SetDutyCycle(potPin2);
+    float knobTone = Phase.KnobTone(potPin3);
+    Op.PlayTone(knobTone, Phase, Player);
+    
+  } else if (mode == 4) // POT-DRIVEN TONE WITH SWEEPING DUTY CYCLE
   {
     AllColors.Cyan();
+    float knobTone = Phase.KnobTone(potPin3);
+    int sweepMode = 0;
+    float sweepRate = Phase.SetSweepRate(potPin2);
+    Phase.DutyCycleSweep(sweepMode, sweepRate);
+    Op.PlayTone(knobTone, Phase, Player);
   } else if (mode == 5)
   {
     AllColors.Purple();

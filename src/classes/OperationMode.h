@@ -17,4 +17,5 @@ class OperationMode{
     int GetOperationMode();
     void PlayNote(AllNotes, DutyCycle, TonePlayer);
     void PlayWithoutDelay(AllNotes, DutyCycle, TonePlayer, Timer, Timer);
+    void PlayTone(float tone, DutyCycle duty, TonePlayer player);
 };
