@@ -6,6 +6,7 @@
 #include "classes/Partial.h"
 #include "classes/OperationMode.h"
 #include "classes/TonePlayer.h"
+#include "classes/math_utils.h"
 
 // Global variables
 DutyCycle Phase;
@@ -35,14 +36,11 @@ void loop() {
 void PlayNote(){
   int cvValue = analogRead(cvIn);
   int gateValue = analogRead(gateIn);
-
+  int tuningValue = analogRead(potPin3);
   if (gateValue > 1000)
   {
       Note note = Notes.GetNoteFromCV(cvValue);
-      //tone(buzzerPin, note);
-      Partial notePart = note.GetPartial();
-      Serial.println(notePart.HighLength(Phase));
-      Player.PlayToneUsingDelay(notePart.HighLength(Phase), buzzerPin, Phase);
+      Player.PlayToneUsingDelay(note, buzzerPin, Phase);
   } else
   {
       noTone(buzzerPin);

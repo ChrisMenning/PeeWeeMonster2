@@ -1,4 +1,5 @@
 #include "math_utils.h"
+#include "pins.h"
 // Directly map a control voltage to a tone. This is most useful for handling glides.
 // OR directly map a potentiometer value to a duty cycle. (int range to float range).
 float mapIntRangetoFloatRange(int input, float inMin, float inMax, float outMin, float outMax)
@@ -8,8 +9,9 @@ float mapIntRangetoFloatRange(int input, float inMin, float inMax, float outMin,
     return result;
 }
 
-float tuning (int potValue)
+float tuning ()
 {
-  //Serial.println(potValue);
-  return mapIntRangetoFloatRange(potValue, 0, 695, 0.9, 1.2);
+  int tuningValue = analogRead(potPin1);
+  Serial.println(tuningValue);
+  return mapIntRangetoFloatRange(tuningValue, 0, 695, 0.9, 1.2);
 }

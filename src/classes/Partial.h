@@ -8,7 +8,8 @@ class Partial{
     unsigned long LowLength(DutyCycle);
     
     Partial(float freq){
-        float high = 1/freq;
-        Length = high * 1000000;
+        float high = 1 / freq; // Yields a near-zero decimal.
+        float highMs = high * 1000; // Convert to ms before assigning to int, to avoid losing percentages.
+        Length = highMs * 1000; // Convert to micros.
     };
 };
