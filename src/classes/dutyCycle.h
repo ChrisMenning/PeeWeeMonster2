@@ -3,8 +3,8 @@ class DutyCycle{
     public:
     float HighPart;
     float LowPart();
-    const float HighCeiling = 0.99;;
-    const float HighFloor = 0.001;
+    const float HighCeiling = 0.9;;
+    const float HighFloor = 0.1;
     bool rising = true;
     void SetDutyCycle(int phasePot);
     int SetSweepMode(int ratePot);

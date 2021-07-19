@@ -30,13 +30,14 @@ int DutyCycle::SetSweepMode(int inputPot)
 float DutyCycle::SetSweepRate(int inputPot)
 {
     int value = analogRead(inputPot);
-    float newValue = (value - 0) * (HighCeiling - HighFloor) / (700 - 0) + HighFloor;
+    float newValue = (value - 0) * (HighCeiling - HighFloor) / (700 - 1) + HighFloor;
     return newValue;
 }
 
 // When not using potentiometer to control Duty Cycle, sweep them.
 void DutyCycle::DutyCycleSweep(int sweepMode, float rate)
 {
+  Serial.println(rate);
     if (HighPart == 0)
     {
         HighPart = 0.01;
