@@ -17,3 +17,7 @@ Built on an Arduino Uno and PlatformIO.
 5. PURPLE - Low Frequency Filter Wobble in Even Steps
 6. YELLOW - Low Frequency Filter Wobble, Smooth
 7. WHITE - Repeat Sync Signal (Not quite working Yet)
+
+## Known Issues
+
+Trying to output notes at their known frequencies yields out-of-tune notes due to the nature of using the Arduino's delay() and delayMicroseconds() methods, especially in combination with everything else running within the main loop. I am experimenting with a timer-based solution.
